@@ -7,14 +7,22 @@ class PostsController < ApplicationController
   end
 
   def new
-    # render posts/new view with new Post form
+    @post = Post.new
   end
 
   def create
-    # start with a new Post
-    # assign user-entered form data to Post's columns
-    # save Post row
-    # redirect user
+    @post = Post.new(post_params)
+
+    if @post.save
+      redirect_to("/posts")
+    else
+      render(:new, status: :unprocessable_entity)
+    end
   end
 
+  private
+
+  def post_params
+    params.fetch(:post, {}).permit(:author, :body, :image)
+  end
 end
