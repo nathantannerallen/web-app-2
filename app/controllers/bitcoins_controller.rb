@@ -1,7 +1,7 @@
 class BitcoinsController < ApplicationController
 
   def index
-      @bitcoin = 1.0
+      @bitcoin = params["amount"].to_f
 
       # connect to the Blockchain.com Exchange Rates API
       # DON'T CHANGE THIS CODE
